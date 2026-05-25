@@ -88,6 +88,10 @@ class validateOP #(
 
     endtask
     
+    function logic [OPERAND_WIDTH : 0] giveExpecteds();
+        return {this.overflowExpected, this.resultExpected};
+    endfunction
+
     function void getMeasurements(input logic [OPERAND_WIDTH - 1:0] resultMeasurement, input logic overflowMeasurement);
         this.resultMeasured = resultMeasurement;
         this.overflowMeasured = overflowMeasurement;
@@ -137,9 +141,11 @@ class sweep #(
                 vif.inputA  = i[OPERAND_WIDTH - 1:0];
                 vif.inputB  = j[OPERAND_WIDTH - 1:0];
                 vif.enable  = 1;
-                #10;  // wait for DUT to settle
+                #5;  // wait for DUT to settle
                 validator.getMeasurements(vif.result, vif.overflow);
                 validator.validate(i[OPERAND_WIDTH - 1:0], j[OPERAND_WIDTH - 1:0]);
+                {vif.expectedOverflow, vif.expectedResult} = validator.giveExpecteds();
+                #5; // show waveform
             end
         end
     endtask
@@ -156,6 +162,8 @@ interface ALU_if #(
     logic [NUM_OPS - 1:0]  opcode;
     logic [OPERAND_WIDTH - 1:0]  result;
     logic        overflow;
+    logic [OPERAND_WIDTH - 1:0]  expectedResult;
+    logic        expectedOverflow;
 endinterface
 
 module ALUTestbench();
@@ -181,7 +189,6 @@ module ALUTestbench();
     ALU #(
     ) dut (
         .reset_n(alu_if.reset_n),
-        .enable(alu_if.enable),
         .inputA(alu_if.inputA),
         .inputB(alu_if.inputB),
         .opcode(alu_if.opcode),
@@ -195,15 +202,32 @@ module ALUTestbench();
         OPERAND_WIDTH
     ) sweeper;
 
-    initial begin
-        // construct validators first
+    // construct validators first
 
-        validateOP #(
+    validateOP #(
         MAXERRORS, 
         NUM_OPS, 
         OPERAND_WIDTH
-        ) validator;    
+    ) validator;   
 
+    logic [OPERAND_WIDTH - 1:0] inputA;
+    logic [OPERAND_WIDTH - 1:0] inputB;
+    logic [OPERAND_WIDTH - 1:0] resultExpected;
+    logic [OPERAND_WIDTH - 1:0] resultMeasured;
+    logic overflowExpected;
+    logic overflowMeasured;
+    logic [NUM_OPS - 1:0] opcode;
+    
+    assign inputA = alu_if.inputA;
+    assign inputB = alu_if.inputB;
+    assign resultExpected = alu_if.expectedResult;
+    assign resultMeasured = alu_if.result;
+    assign overflowExpected = alu_if.expectedOverflow;
+    assign overflowMeasured = alu_if.overflow;
+    assign opcode = alu_if.opcode;
+    
+    initial begin 
+    
         for (int i = 0; i < NUM_OPS; i++) begin
             /* Reset the system, then validate all. */
             alu_if.opcode = one_hot_ops(NUM_OPS - 1 - i);
@@ -211,6 +235,7 @@ module ALUTestbench();
             reset();
             sweeper = new(alu_if, validator); // pass it into sweep
             sweeper.run();
+            $display("Opcode %b completed.", alu_if.opcode);
         end
     end
 endmodule

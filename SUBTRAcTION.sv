@@ -7,6 +7,6 @@ output logic [7:0]result_subtract,
 output logic overflow
 );
 
-assign result_subtract = enable_subtract * (A - B);
+assign {overflow,result_subtract} = enable_subtract ? (A - B) : 0;
 
 endmodule

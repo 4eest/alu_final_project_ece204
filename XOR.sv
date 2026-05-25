@@ -10,7 +10,7 @@ output logic overflow
 
 
 
-assign result_xor = enable_xor * (A ^ B);
+assign result_xor = enable_xor ? (A ^ B) : 0;
 assign overflow = 0;
 
 endmodule 

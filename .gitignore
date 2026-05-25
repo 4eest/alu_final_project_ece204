@@ -13,6 +13,7 @@
 # Ignore everything except SystemVerilog (.sv) files
 !*.sv
 !**/*.sv
+!*.do
 
 # Optional: ignore typical build artifacts
 build/

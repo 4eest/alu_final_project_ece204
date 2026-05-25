@@ -10,7 +10,7 @@ output logic overflow
 
 
 
-assign result_and = enable_and * (A & B);
+assign result_and = enable_and ? (A & B) : 0;
 assign overflow = 0;
 
 endmodule 

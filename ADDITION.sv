@@ -7,5 +7,5 @@ output logic [7:0]result_add,
 output logic overflow
 );
 
-assign result_add = enable_and * (A + B);
+assign {overflow,result_add} = enable_add ? (A + B) : 0;
 endmodule
