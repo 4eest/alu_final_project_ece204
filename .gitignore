@@ -1,0 +1,23 @@
+# Ignore everything
+*
+
+# Allow entering directories
+!*/
+
+# Keep System/git files
+!.gitignore
+
+# Allow System files if needed
+!.gitattributes
+
+# Ignore everything except SystemVerilog (.sv) files
+!*.sv
+!**/*.sv
+
+# Optional: ignore typical build artifacts
+build/
+bin/
+obj/
+*.o
+*.exe
+*.log
