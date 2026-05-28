@@ -3,7 +3,6 @@ module ALU(
 	input logic reset_n,
 	input logic [7:0] inputA,
 	input logic [7:0] inputB,
-	
 	input logic [7:0] opcode,
 
 	output logic [7:0] result,
