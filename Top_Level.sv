@@ -34,7 +34,7 @@ logic [7:0] opcode_decoded;
 // Sequential Input Handling
 inputHandler inputHandler(
 	.data_in(data_in),
-	.save(save),
+	.save(save), // account for active low buttons on fpga
 	.reset_n(reset_n),
 	.input_passthrough(current_input),
 	.reg1(inputB),

@@ -5,7 +5,6 @@ module ALU(
 	input logic [7:0] inputB,
 	input logic [7:0] opcode,
 	input logic enable,
-
 	output logic [7:0] result,
 	output logic overflow
 );
@@ -80,7 +79,6 @@ alu_add ADD_instance(
 	.result_add(result_add),
 	.overflow(overflow_add)
 );
-
 
 alu_subtract SUB_instance(
 	.A(inputA),
