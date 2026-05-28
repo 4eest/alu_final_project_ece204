@@ -43,7 +43,8 @@ inputHandler inputHandler(
 
 opcode decoder(
 	.sw(opcode),
-	.opcode_decode(opcode_decoded)
+	.opcode_decode(opcode_decoded),
+	.enable(enable)
 );
 
 ALU Calculator(
