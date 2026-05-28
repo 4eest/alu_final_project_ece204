@@ -41,7 +41,7 @@ inputHandler inputHandler(
 	.reg2(inputA)
 );
 
-Opcode decoder(
+opcode decoder(
 	.sw(opcode),
 	.opcode_decode(opcode_decoded)
 );
