@@ -5,7 +5,7 @@ module Parser(
 	output logic [3:0] hundreds 
 );
 
-logic remainder [7:0];
+logic [7:0] remainder;
 	always_comb begin
 	
 	
@@ -19,5 +19,3 @@ logic remainder [7:0];
 	end
 
 endmodule
-
-
