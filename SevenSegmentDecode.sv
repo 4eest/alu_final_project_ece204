@@ -62,7 +62,7 @@ always_comb begin
 		  4'h3: segments = 7'b011_0000;
 		  4'h4: segments = 7'b001_1001;
 		  4'h5: segments = 7'b001_0010;
-		  4'h6: segments = 'b000_0010;
+		  4'h6: segments = 7'b000_0010;
 		  4'h7: segments = 7'b111_1000;
 		  4'h8: segments = 7'b000_0000;
 		  4'h9: segments = 7'b001_0000;

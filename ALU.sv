@@ -4,7 +4,7 @@ module ALU(
 	input logic [7:0] inputA,
 	input logic [7:0] inputB,
 	input logic [7:0] opcode,
-
+	input logic enable,
 	output logic [7:0] result,
 	output logic overflow
 );
@@ -36,7 +36,7 @@ logic overflow_outA;
 logic overflow_outB;
 logic overflow_nand;
 
-assign {enable_add, enable_subtract, enable_and, enable_or, enable_xor, enable_outA, enable_outB, enable_nand} = opcode;
+assign {enable_add, enable_subtract, enable_and, enable_or, enable_xor, enable_outA, enable_outB, enable_nand} = enable ? opcode : 0;
 
 alu_or OR_instance(
 	.A(inputA),
@@ -79,7 +79,6 @@ alu_add ADD_instance(
 	.result_add(result_add),
 	.overflow(overflow_add)
 );
-
 
 alu_subtract SUB_instance(
 	.A(inputA),
