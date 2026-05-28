@@ -36,7 +36,7 @@ logic overflow_outA;
 logic overflow_outB;
 logic overflow_nand;
 
-assign {enable_add, enable_subtract, enable_and, enable_or, enable_xor, enable_outA, enable_outB, enable_nand} = opcode;
+assign {enable_add, enable_subtract, enable_and, enable_or, enable_xor, enable_outA, enable_outB, enable_nand} = enable ? opcode : 0;
 
 alu_or OR_instance(
 	.A(inputA),

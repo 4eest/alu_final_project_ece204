@@ -48,6 +48,7 @@ opcode decoder(
 
 ALU Calculator(
 	.reset_n(reset_n),
+	.enable(enable),
 	.inputA(inputA),
 	.inputB(inputB),
 	.result(result),
