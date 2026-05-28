@@ -8,8 +8,10 @@ module Parser(
 	always_comb begin
 	
 		if(overflow == 1) begin
-			assign ones = count % 10;
-			assign tens = count / 10;
+			assign hundreds = count / 100;
+			assign remainder = count % 100;
+			assign tens = remainder / 10;
+			assign ones = remainder % 10;
 		end else begin
 			assign ones = 4'b1111;
 			assign tens = 4'b1111;
