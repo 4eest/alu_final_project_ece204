@@ -28,6 +28,7 @@ assign LED_out = result;
 logic [3:0] ones_place;
 logic [3:0] tens_place;
 logic [3:0] hundreds_place;
+
 logic [7:0] opcode_decoded;
 
 // Sequential Input Handling
