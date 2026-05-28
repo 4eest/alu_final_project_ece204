@@ -1,13 +1,13 @@
 module opcode(
 
-	input logic [5:0] sw,
+	input logic [2:0] sw,
 		
-	output logic enable_or,
-	output logic enable_xor,
-	output logic enable_and,
-	output logic enable_nand,
-	output logic enable_add,
-	output logic enable_subtract
+	output logic [7:0] enable_or,
+	output logic [7:0] enable_xor,
+	output logic [7:0] enable_and,
+	output logic [7:0] enable_nand,
+	output logic [7:0] enable_add,
+	output logic [7:0] enable_subtract
 
 
 );
@@ -22,16 +22,21 @@ always_comb begin
 	enable_nand = 0;
    enable_add = 0;
    enable_subtract = 0;
+	enable_outA = 0;
+	enable_outB = 0;
 	
 	case(enable)
 
-		3'b000: enable_or       = 1;
-      3'b001: enable_xor      = 1;
-      3'b010: enable_and      = 1;
-      3'b011: enable_nand     = 1;
-      3'b100: enable_add      = 1;
-      3'b101: enable_subtract = 1;
-		  
+		3'b000: enable_add      = 8’b10000000;
+      3'b001: enable_subtract = 8’b01000000;
+      3'b010: enable_and      = 8’b00100000;
+      3'b011: enable_xor      = 8’b00010000;
+		3'b100: enable_or       = 8’b00001000;
+		3'b101: enable_outA     = 8’b00000100;
+      3'b110: enable_outB     = 8’b00000010;
+      3'b111: enable_nand     = 8’b00000001;
+
+		
 		default: begin
 			enable_or       = 0;
          enable_xor      = 0;
@@ -39,6 +44,9 @@ always_comb begin
          enable_nand     = 0;
          enable_add      = 0;
          enable_subtract = 0;
+			enable_outA     = 0;
+			enable_outB     = 0;
+
       end
 	endcase
 end
