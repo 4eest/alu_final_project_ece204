@@ -4,6 +4,7 @@ module ALU(
 	input logic [7:0] inputA,
 	input logic [7:0] inputB,
 	input logic [7:0] opcode,
+	input logic enable,
 
 	output logic [7:0] result,
 	output logic overflow
