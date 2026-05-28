@@ -1,13 +1,13 @@
 module opcode(
 
 	input logic [2:0] sw,
-		
+	input logic enable,	
 	output logic [7:0] opcode_decode
 
 
 );
 
-logic enable = 1;
+;
 
 always_comb begin
 	

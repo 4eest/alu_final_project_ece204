@@ -43,6 +43,7 @@ inputHandler inputHandler(
 
 Opcode decoder(
 	.sw(opcode),
+	.enable(enable),
 	.opcode_decode(opcode_decoded)
 );
 
@@ -58,7 +59,6 @@ ALU Calculator(
 // parser
 Parser ALU_parser(
 	.count(result),
-	.overflow(overflow),
 	.ones(ones_place),
 	.tens(tens_place)
 );
