@@ -7,13 +7,11 @@ module opcode(
 
 );
 
-;
-
 always_comb begin
 	
 	opcode_decode = 0;
 	
-	case(enable)
+	case(sw)
 
 		3'b000: opcode_decode     = 8'b10000000;
       3'b001: opcode_decode = 8'b01000000;

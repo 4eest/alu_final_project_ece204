@@ -52,6 +52,7 @@ always_ff @(posedge save or negedge reset_n) begin
             clear_sig_n <= 0;
             counter <= 0;
         end
+        
     end
 
 end
