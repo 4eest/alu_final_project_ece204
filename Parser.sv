@@ -2,10 +2,12 @@ module Parser(
 	input logic [7:0] count,
 	input logic overflow,
 	output logic [3:0] ones,
-	output logic [3:0] tens
+	output logic [3:0] tens,
+	output logic [3:0] hundreds 
 );
 
 	always_comb begin
+	logic remainder; 
 	
 		if(overflow == 1) begin
 			assign hundreds = count / 100;
