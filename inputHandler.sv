@@ -32,33 +32,22 @@ RegisterNBit #(
     .q(reg2_out)
 );
 
+assign input_passthrough = (counter == 2) ? data_in : 0;
+assign reg1 = (counter == 2) ? reg1_out : 0;
+assign reg2 = (counter == 2) ? reg2_out : 0;
+
 always_ff @(posedge save or negedge reset_n) begin
     
     if (reset_n == 1'b0) begin
         counter <= 0;
         clear_sig_n <= 1;
-        input_passthrough <= 0;
-        reg1 <= 0;
-        reg2 <= 0;
 
     end else begin
 
         counter <= counter + 1;
 
         if (counter < 2) begin
-
             clear_sig_n <= 1;
-
-            if (counter == 1) begin
-                input_passthrough <= data_in;
-                reg1 <= reg1_out;
-                reg2 <= reg2_out;
-            end else begin
-                input_passthrough <= 0;
-                reg1 <= 0;
-                reg2 <= 0;
-            end
-
         end else if (counter == 2) begin
             clear_sig_n <= 0;
             counter <= 0;

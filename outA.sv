@@ -10,7 +10,7 @@ output logic overflow
 
 
 
-assign result_outA = enable_outA * (A);
+assign result_outA = enable_outA ? (A) : 0;
 assign overflow = 0;
 
 endmodule 
