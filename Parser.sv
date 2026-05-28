@@ -5,20 +5,13 @@ module Parser(
 	output logic [3:0] tens,
 	output logic [3:0] hundreds 
 );
-
-	always_comb begin
 	logic remainder; 
+	always_comb begin
 	
-		if(overflow == 1) begin
-			assign hundreds = count / 100;
-			assign remainder = count % 100;
-			assign tens = remainder / 10;
-			assign ones = remainder % 10;
-		end else begin
-			assign ones = 4'b1111;
-			assign tens = 4'b1111;
-		end
-
+		hundreds = count / 100;
+		remainder = count % 100;
+		tens = remainder / 10;
+		ones = remainder % 10;
 
 	end
 
